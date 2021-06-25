@@ -1,106 +1,107 @@
-
-
 <html>
 <style>
-    
-    html{
-        background-color: rgb(0,0,0);
-        width:100%;
-        height:100%;
+    html {
+        background-color: rgb(0, 0, 0);
+        width: 100%;
+        height: 100%;
     }
     
-    td{
+    table {
+        margin: auto;
+    }
+    
+    td {
         width: 40px;
         height: 40px;
-    }
-    
-    .c{
-        background-color: rgb(50,50,50);
         border-radius: 5px;
     }
     
-    .l{
-        background-color: rgb(0,160,250);
+    .c {
+        background-color: rgb(50, 50, 50);
     }
     
+    .l {
+        background-color: rgb(0, 160, 250);
+    }
 </style>
-    <head>
-        <title>Jsp</title>
-    </head>
-    <body onload="init();">
-        <table id="table">
-        </table>
-    </body>
+
+<head>
+    <title>Jsp</title>
+</head>
+
+<body onload="init();">
+    <table id="table">
+    </table>
+</body>
 <script>
+    var tc = 8;
+    var melange = 50;
 
-var tc=7;
+    var p = [];
 
-var p = [];
-
-function f(x,y){
-    click(x,y);
-}
-
-
-function init(){
-    var t=document.getElementById("table");
-    for(y=0;y<tc;y++){
-        var r = document.createElement("tr");
-        p.push([]);
-        for(x=0;x<tc;x++){
-            p[y].push(0);
-            var d = document.createElement("td");
-            d.setAttribute("id", ""+x+"_"+y);
-            d.classList.add("c");
-            d.setAttribute("onclick", "f("+x+","+y+")");
-            r.appendChild(d);
-        }
-        table.appendChild(r);
+    function f(x, y) {
+        click(x, y);
     }
-    //
-    for(a=0; a<100; a++){
-        var x = parseInt(Math.random()*tc);
-        var y = parseInt(Math.random()*tc);
-        click(x,y);
-    }
-}
 
-function test(){
-    for(x=0;x<tc;x++){
-        for(y=0;y<tc;y++){
-            if(p[y][x]==1){
-                return false;
+
+    function init() {
+        var t = document.getElementById("table");
+        for (y = 0; y < tc; y++) {
+            var r = document.createElement("tr");
+            p.push([]);
+            for (x = 0; x < tc; x++) {
+                p[y].push(0);
+                var d = document.createElement("td");
+                d.setAttribute("id", "" + x + "_" + y);
+                d.classList.add("c");
+                d.setAttribute("onclick", "f(" + x + "," + y + ")");
+                r.appendChild(d);
             }
+            table.appendChild(r);
+        }
+        //
+        for (a = 0; a < melange; a++) {
+            var x = parseInt(Math.random() * tc);
+            var y = parseInt(Math.random() * tc);
+            click(x, y);
         }
     }
-    return true;
-}
-    
 
-function click(X,Y){
-    for(dx=-1;dx<=1;dx++){
-        for(dy=-1;dy<=1;dy++){
-            x=X+dx;
-            y=Y+dy;
-            if(x>=0 && x<tc && y>=0 && y<tc){
-               c=document.getElementById(""+x+"_"+y);
-                if(p[y][x]==0){
-                    p[y][x]=1;
-                    c.classList.add("l");
-                    c.classList.remove("c");
-                }else{
-                    p[y][x]=0;
-                    c.classList.remove("l");
-                    c.classList.add("c");
+    function test() {
+        for (x = 0; x < tc; x++) {
+            for (y = 0; y < tc; y++) {
+                if (p[y][x] == 1) {
+                    return false;
                 }
             }
         }
+        return true;
     }
-    if(test()){
-        alert("gagné !");
-    }
-}
 
 
+    function click(X, Y) {
+        for (dx = -1; dx <= 1; dx++) {
+            for (dy = -1; dy <= 1; dy++) {
+                x = X + dx;
+                y = Y + dy;
+                if (x >= 0 && x < tc && y >= 0 && y < tc) {
+                    c = document.getElementById("" + x + "_" + y);
+                    if (p[y][x] == 0) {
+                        p[y][x] = 1;
+                        c.classList.add("l");
+                        c.classList.remove("c");
+                    } else {
+                        p[y][x] = 0;
+                        c.classList.remove("l");
+                        c.classList.add("c");
+                    }
+                }
+            }
+        }
+        if (test()) {
+            alert("gagné !");
+        }
+    }
 </script>
+
 </html>
